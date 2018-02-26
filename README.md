@@ -1,2 +1,4 @@
-# data-consumer-vignettes
-Simple walk-throughs of interacting with the DCP as a downstream data consumer.
+# DCP Data Consumer Vignettes
+
+This repo contains some naive attempts at using the HCA DCP to accomplish some
+downstream data tasks.
