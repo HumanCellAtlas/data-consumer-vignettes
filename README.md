@@ -5,7 +5,7 @@
 | --- | --- |
 | :white_check_mark: | [Install the HCA CLI](tasks/Install)
 | :large_orange_diamond: | [Log in to the DSS](tasks/Log%20In) |
-| :full_moon: | Download any BAM file |
+| :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
 | :white_circle: | Download SmartSeq2 expression matrix as an input to scanpy |
 | :white_circle: | Find out how many liver (whatever) cells are available |
