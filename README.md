@@ -11,7 +11,11 @@
 | :white_circle: | Find out how many liver (whatever) cells are available |
 | :white_circle: | Download all bundles for T-cells sequenced with 10x |
 | :white_circle: | Compare QC metrics between one experiment and another |
-
+| :white_circle: | Check gene expression of key markers for immune cells |
+| :white_circle: | Compare averaged gene expression of neurons to bulk controls |
+| :white_circle: | Find most variable genes in monocytes across experiments |
+| :white_circle: | Identify most differentially expressed genes between t-cells and monocytes |
+| :white_circle: | Discover novel liver cell types by cross-referencing HCA single cells with known datasets |
 
 The DCP is responsible for making HCA data available and useful to downstream
 users. There are a few ways this can be done, including data portals and
@@ -21,3 +25,4 @@ programming language. This repo examines the experience of those users.
 
 This repo contains a number of "tasks" of increasing complexity and one or more
 jupyter notebooks that attempt to accomplish each task.
+
