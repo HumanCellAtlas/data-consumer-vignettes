@@ -17,6 +17,12 @@
 | :white_circle: | Identify most differentially expressed genes between t-cells and monocytes |
 | :white_circle: | Discover novel liver cell types by cross-referencing HCA single cells with known datasets |
 
+##### Legend
+| :white_check_mark: | :full_moon: | :large_orange_diamond: | :red_circle: |
+:white_circle: |
+| :---: | :---: | :---: | :---: | :---: |
+|Works great! | A little kludgy | Requires awkward workarounds | Seems impossible | Haven't tried yet |
+
 The DCP is responsible for making HCA data available and useful to downstream
 users. There are a few ways this can be done, including data portals and
 various "red box" GUIs. But we also expect that many users will want to access
@@ -24,5 +30,8 @@ HCA data via the command line or through a library in their preferred
 programming language. This repo examines the experience of those users.
 
 This repo contains a number of "tasks" of increasing complexity and one or more
-jupyter notebooks that attempt to accomplish each task.
-
+jupyter notebooks that attempt to accomplish each task. Initially, we would
+expect the user experience to be pretty rough. But over time, we can use these
+tasks to improve interfaces and documentation. And these tasks should
+ultimately converge to a set of well-documented walkthroughs for a broad range
+of DCP users.
