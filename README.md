@@ -5,6 +5,7 @@
 | --- | --- |
 | :white_check_mark: | [Install the HCA CLI](tasks/Install)
 | :large_orange_diamond: | [Log in to the DSS](tasks/Log%20In) |
+| :full_moon: | [Stream FASTQs and Calculate k-mers with SPARK](tasks/SPARK) |
 | :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
 | :white_circle: | Download SmartSeq2 expression matrix as an input to scanpy |
@@ -35,4 +36,3 @@ expect the user experience to be pretty rough. But over time, we can use these
 tasks to improve interfaces and documentation. And these tasks should
 ultimately converge to a set of well-documented walkthroughs for a broad range
 of DCP users.
-
