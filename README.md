@@ -8,8 +8,7 @@
 | :full_moon: | [Stream FASTQs and Calculate k-mers with SPARK](tasks/SPARK) |
 | :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :full_moon: | [Investigate a Bundle](tasks/Investigate%20a%20Bundle) |
-| :full_moon: | [Querying the Data Storage
-System](tasks/Querying%20the%20Data%20Storage%20System) |
+| :full_moon: | [Querying the Data Storage System](tasks/Querying%20the%20Data%20Storage%20System) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
 | :white_circle: | Download SmartSeq2 expression matrix as an input to scanpy |
 | :white_circle: | Find out how many liver (whatever) cells are available |
