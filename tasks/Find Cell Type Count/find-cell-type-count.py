@@ -10,15 +10,15 @@ def count_cell_types(cell_type):
             "bool" : {
                 "must" : [{
                     "match" : {
-                        "metadata.files.biomaterial_json.biomaterials.context.organ.text" : "spleen"
+                        "files.biomaterial_json.biomaterials.content.organ.text" : cell_type
                     }
                 }, {
                     "match" : {
-                        "metadata.files.biomaterial_json.schema_version" : "5.1.0"
+                        "files.biomaterial_json.schema_version" : "5.1.0"
                     }
                 }, {
                     "range" : {
-                        "metadata.files.biomaterial_json.biomaterials.content.total_estimated_cells" : {
+                        "files.biomaterial_json.biomaterials.content.total_estimated_cells" : {
                             "gt" : 0
                         }
                     }
@@ -27,27 +27,15 @@ def count_cell_types(cell_type):
         }
     }
     
-#    query = { "query" : { "bool" : { "must" : { "match" : { "*" : "*" } } } } }
-    
-#    query = { "query" : { "match" : { "search_score" : 1.0 } } }
-    
-    query = { "match" : { "search_score" : 1.0 } }
-    
     # Iterate through all search results containing the chosen cell type
-    for bundle_dict in hca.dss.DSSClient().post_search.iterate(es_query=query, replica='aws', output_format='raw'):
+    for bundle in hca.dss.DSSClient().post_search.iterate(es_query=query, replica='aws', output_format='raw'):
         
-        # Check if the bundle is missing information. If so, skip to next iteration
-        if not bundle_dict['metadata'].get('files'):
+        # Skip over any empty bundles
+        if not bundle['metadata'].get('files'):
             continue
         
-        print(json.dumps(bundle_dict, indent=4, sort_keys=True))
-        print()
-        
         # If the checks passed, then increment the count by the number of cells found in this file
-        count += bundle_dict['metadata']['files']['biomaterial_json']['biomaterials'][0]['content']['total_estimated_cells']
-        print(count)
-        break
-        
+        count += bundle['metadata']['files']['biomaterial_json']['biomaterials'][0]['content']['total_estimated_cells']
     return count
 
 
