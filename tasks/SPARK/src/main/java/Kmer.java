@@ -1,27 +1,27 @@
 
 // STEP-0: import required classes and interfaces
+
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFlatMapFunction;
+import org.apache.spark.broadcast.Broadcast;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import scala.Tuple2;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
 //
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import scala.Array;
-import scala.Tuple2;
 //
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.PairFlatMapFunction;
-import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.Function2;
-import org.apache.spark.broadcast.Broadcast;
 
 //
 //import org.dataalgorithms.util.SparkUtil;
@@ -46,6 +46,28 @@ import org.apache.spark.broadcast.Broadcast;
  * need to add UUID prefix and deal correctly with that in the final code
  *
  */
+
+interface Retriable<T> {
+    T run() throws Exception;
+    static Random random = new Random();
+
+    static <T> Optional<T> runWithRetries(int maxRetries, int maxInterval, Retriable<T> t) throws InterruptedException {
+        int count = 0;
+        while (count < maxRetries) {
+            try {
+                T value = t.run();
+                return Optional.of(value);
+            } catch (Exception e) {
+                // simple backoff with jitter added
+                Thread.sleep((count + 1) * 1000L + (long)(Retriable.random.nextDouble() * maxInterval));
+                if (++count >= maxRetries) break;
+            }
+        }
+        return Optional.empty();
+    };
+};
+
+
 public class Kmer {
 
     // utility
@@ -62,29 +84,36 @@ public class Kmer {
     }
 
     // utility
-    public static HttpURLConnection readLocationFromUrl(String url) throws IOException, JSONException {
+    public static HttpURLConnection readLocationFromUrl(String url) throws IOException, InterruptedException {
         // TODO: this will need to deal with 301 code better
-        URL myUrl = new URL(url);
-        System.err.println("THE URL: "+url);
-        HttpURLConnection connection = (HttpURLConnection)myUrl.openConnection();
-        connection.setRequestMethod("GET");
-        connection.connect();
-        int code = connection.getResponseCode();
-        if (code == 301) { // TODO: needs to be a retry loop
-            System.err.println("GOT A 301 retry: "+url);
-            connection = (HttpURLConnection)myUrl.openConnection();
+        String location = url;
+        HttpURLConnection connection = null;
+        int code = -1;
+        int attempts = 0;
+        while (true) {
+            // attempt the request
+            URL currentUrl = new URL(location);
+            connection = (HttpURLConnection)currentUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
-        }
-        Map<String, List<String>> map = connection.getHeaderFields();
-        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-            System.err.println("Key : " + entry.getKey() +
-                    " ,Value : " + entry.getValue());
-        }
-        String redirect = connection.getHeaderField("Location");
+            code = connection.getResponseCode();
 
-        System.err.println("REDIRECT : "+redirect);
-        return(connection);
+            // if this is not a 301, return the connection
+            if (code != 301) break;
+
+            // else wait until retryAfter seconds is up
+            int retryAfter = Integer.parseInt(connection.getHeaderField("retry-after"));
+            System.err.println(String.format("301, retry-after %ds: %s", retryAfter, url));
+            Thread.sleep(retryAfter * 1000L);
+            location = connection.getHeaderField("location");
+            attempts++;
+            if (attempts >= 10) {
+                // fail hard
+                System.err.println("HTTP 301 Cycle loop!");
+                System.exit(1);
+            }
+        }
+        return connection;
     }
 
     // utility
@@ -98,7 +127,7 @@ public class Kmer {
     }
 
     // utility
-    public static ArrayList<String> streamAndFilterFastqGz(String uuid, int numberOfLines) {
+    public static ArrayList<String> streamAndFilterFastqGz(String uuid, String url, int numberOfLines) {
 
         // pattern matching
         Pattern pattern = Pattern.compile("^[atgcATGC]+$");
@@ -107,7 +136,17 @@ public class Kmer {
         // open up the uuid and stream back from it
         try {
             // TODO: URL is hard coded for production, need a parameter.
-            HttpURLConnection connection = Kmer.readLocationFromUrl("https://dss.data.humancellatlas.org/v1/files/"+uuid+"?replica=aws");
+            Optional<HttpURLConnection> maybeConnection = Retriable.runWithRetries(
+                    3,
+                    2000,
+                    () -> Kmer.readLocationFromUrl(url)
+            );
+            if (!maybeConnection.isPresent()) {
+                // fail hard
+                System.err.printf("GET FAILED: %s\n", url);
+                System.exit(1);
+            }
+            HttpURLConnection connection = maybeConnection.get();
             InputStream is = connection.getInputStream();
             try {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(new GZIPInputStream(is), Charset.forName("UTF-8")));
@@ -128,6 +167,33 @@ public class Kmer {
             System.err.println("ERROR READING FROM FILE URL 2: "+e.getMessage());
         }
         return(result);
+    }
+
+    static ArrayList<Tuple2<String,String>> requestFileUrls(String uuid) throws Exception {
+        // get bundle with retries or fail
+        Optional<JSONObject> maybeJSON = Retriable.runWithRetries(
+                3,
+                2000,
+                () -> Kmer.readJsonFromUrl("https://dss.data.humancellatlas.org/v1/bundles/" + uuid + "?replica=aws&presignedurls=true")
+        );
+        if (!maybeJSON.isPresent()) {
+            // fail hard
+            System.err.printf("GETTING BUNDLE %s FAILED\n", uuid);
+            System.exit(1);
+        }
+        JSONObject json = maybeJSON.get();
+
+        System.err.println("FROM THE JSON: "+((JSONObject)json.get("bundle")).get("creator_uid"));
+        ArrayList<Tuple2<String,String>> results = new ArrayList<>();
+        for (int i=0; i<((JSONObject)json.get("bundle")).getJSONArray("files").length(); i++ ) {
+            JSONObject o = ((JSONObject)json.get("bundle")).getJSONArray("files").getJSONObject(i);
+            String fileUrl = (String)o.get("url");
+            String fileUuid = (String)o.get("uuid");
+            if("application/gzip; dcp-type=data".equals((String)o.get("content-type"))) {
+                results.add(new Tuple2<>(fileUuid, fileUrl));
+            }
+        }
+        return results;
     }
 
     // main method
@@ -155,30 +221,12 @@ public class Kmer {
         // this is a manifest of UUIDs
         JavaRDD<String> manifestRecords = ctx.textFile(manifestPath, partitionsNum);
         //JavaRDD<String> manifestRecords = ctx.textFile(manifestPath);
-        JavaRDD<String> listOfFastqUUIDs = manifestRecords.flatMap(data -> {
-            ArrayList<String> results = new ArrayList<String>();
-            try {
-                JSONObject json = Kmer.readJsonFromUrl("https://dss.data.humancellatlas.org/v1/bundles/"+data+"?replica=aws");
-                System.err.println("FROM THE JSON: "+((JSONObject)json.get("bundle")).get("creator_uid"));
-                for (int i=0; i<((JSONObject)json.get("bundle")).getJSONArray("files").length(); i++ ) {
-                    JSONObject o = ((JSONObject)json.get("bundle")).getJSONArray("files").getJSONObject(i);
-                    String uuid = (String)o.get("uuid");
-                    System.err.println("FROM THE JSON THE UUID: "+uuid);
-                    if("application/gzip; dcp-type=data".equals((String)o.get("content-type"))) {
-                        results.add(uuid);
-                    }
-                }
-            } catch (Exception e) {
-                System.err.println("JSON ERROR!!!!: "+e.getMessage());
-            }
-            return(results.iterator());
-        });
-        listOfFastqUUIDs.repartition(partitionsNum).saveAsTextFile(outputPath+"/uuids.tsv");
+        JavaRDD<Tuple2<String,String>> listOfFastqUrls = manifestRecords.flatMap(data -> requestFileUrls(data).iterator());
+        listOfFastqUrls.repartition(partitionsNum).map(t -> t._1).saveAsTextFile(outputPath+"/uuids.tsv");
 
         // now generate fastqs lines prefixed with file UUID
-        // TODO: need to add UUID
-        JavaRDD<String> filteredRDD = listOfFastqUUIDs.flatMap(s -> {
-            ArrayList<String> result = Kmer.streamAndFilterFastqGz(s, numberOfLines);
+        JavaRDD<String> filteredRDD = listOfFastqUrls.flatMap(t -> {
+            ArrayList<String> result = Kmer.streamAndFilterFastqGz(t._1, t._2, numberOfLines);
             return(result.iterator());
         });
 
@@ -202,7 +250,6 @@ public class Kmer {
                 return list.iterator();
             }
         });
-        //kmers.saveAsTextFile(outputPath+"/2.tsv");
 
         // STEP-5: combine/reduce frequent kmers
         JavaPairRDD<String, Integer> kmersGrouped = kmers.reduceByKey(new Function2<Integer, Integer, Integer>() {
@@ -211,7 +258,6 @@ public class Kmer {
                 return i1 + i2;
             }
         });
-        //kmersGrouped.saveAsTextFile(outputPath+"/3.tsv");
 
         // now, we have: (K=kmer,V=frequency)
         // next step is find the top-N kmers
