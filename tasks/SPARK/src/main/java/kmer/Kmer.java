@@ -11,10 +11,7 @@ import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -42,6 +39,7 @@ import java.util.zip.GZIPInputStream;
  * TODO:
  * need to add UUID prefix and deal correctly with that in the final code
  */
+
 public class Kmer {
 
     public static ArrayList<String> streamAndFilterFastqGz(String uuid, String url, int numberOfLines) {
@@ -55,7 +53,20 @@ public class Kmer {
             Optional<HttpURLConnection> maybeConnection = Retriable.runWithRetries(
                     3,
                     2000,
-                    () -> HttpUtil.readLocationFromUrl(url)
+                    attempt -> {
+                        try {
+                            return HttpUtil.readLocationFromUrl(url);
+                        } catch (RetryCycleException | IOException | InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
+                    response -> {
+                        try {
+                            return response.getResponseCode() == 200;
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
             );
             if (!maybeConnection.isPresent()) {
                 // fail hard

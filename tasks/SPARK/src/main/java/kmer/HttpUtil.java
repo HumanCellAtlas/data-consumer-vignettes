@@ -33,7 +33,13 @@ public class HttpUtil {
         Optional<JSONObject> maybeJSON = Retriable.runWithRetries(
                 3,
                 2000,
-                () -> readJsonFromUrl(url)
+                attempt -> {
+                    try {
+                        return readJsonFromUrl(url);
+                    } catch (JSONException | InterruptedException | RetryCycleException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
         );
         if (!maybeJSON.isPresent()) {
             throw new IOException("GET Could not be retreived.");

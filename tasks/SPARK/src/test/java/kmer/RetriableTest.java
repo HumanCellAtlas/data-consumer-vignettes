@@ -3,35 +3,23 @@ package kmer;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Optional;
+
+import static org.junit.Assert.assertTrue;
 
 public class RetriableTest {
 
-    class TestRetriable implements Retriable<Integer> {
-        private int counter;
-
-        public TestRetriable() {
-            counter = 0;
-        }
-
-        public Integer run() throws Exception {
-            counter++;
-            if (counter < 2) {
-                throw new Exception("boom!");
-            }
-            return counter;
-        }
-
-        public int getCounter() {
-            return counter;
-        }
+    @Test
+    public void runWithRetriesShouldValidate() throws InterruptedException {
+        Optional<Integer> opt = Retriable.runWithRetries( 3, 0, attempt -> attempt, i -> false);
+        assertTrue(!opt.isPresent());
     }
 
     @Test
-    public void runWithRetriesShouldRetry() throws InterruptedException {
-        TestRetriable retriable = new TestRetriable();
-        Retriable.runWithRetries( 3, 0, retriable);
-        assertEquals(2, retriable.getCounter());
+    public void runWithRetriesShouldReturnSuccessfulValue() throws InterruptedException {
+        Optional<Integer> opt = Retriable.runWithRetries( 3, 0, attempt -> attempt, i -> i > 1);
+        assertTrue(opt.isPresent());
+        assertTrue(opt.get() == 2);
     }
 }
 
