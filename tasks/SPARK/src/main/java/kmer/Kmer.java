@@ -148,7 +148,8 @@ public class Kmer {
         JavaRDD<String> manifestRecords = ctx.textFile(args.manifestPath, args.partitionsNum);
         //JavaRDD<String> manifestRecords = ctx.textFile(manifestPath);
         JavaRDD<Tuple2<String, String>> listOfFastqUrls = manifestRecords.flatMap(data -> DataStore.requestFileUrls(data).iterator());
-        listOfFastqUrls.map(t -> t._1).saveAsTextFile(outputPath + "/uuids.tsv");
+
+        ctx.parallelize(listOfFastqUrls.map(t -> t._1).collect()).saveAsTextFile(args.outputPath + "/uuids");
 
         // now generate fastqs lines prefixed with file UUID
         JavaRDD<String> filteredRDD = listOfFastqUrls.flatMap(t -> {
@@ -251,7 +252,7 @@ public class Kmer {
         }
 
         JavaRDD<String> finalResultsRDD = ctx.parallelize(finalResults);
-        finalResultsRDD.saveAsTextFile(outputPath + "/top_kmers.tsv");
+        finalResultsRDD.saveAsTextFile(args.outputPath + "/top_kmers");
 
         // I'm commenting these out, they cause the EMR job to fail if I leave either in here!
         //ctx.close();
