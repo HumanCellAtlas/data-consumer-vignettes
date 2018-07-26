@@ -37,6 +37,7 @@ import java.util.zip.GZIPInputStream;
  *
  * @author Mahmoud Parsian
  * @author Brian O'Connor (made tweaks for HCA demo)
+ * @author Matt Weiden (added some tests)
  * <p>
  * TODO:
  * need to add UUID prefix and deal correctly with that in the final code
