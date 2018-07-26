@@ -146,8 +146,9 @@ public class Kmer {
 
         // this is a manifest of UUIDs
         JavaRDD<String> manifestRecords = ctx.textFile(args.manifestPath, args.partitionsNum);
-        //JavaRDD<String> manifestRecords = ctx.textFile(manifestPath);
-        JavaRDD<Tuple2<String, String>> listOfFastqUrls = manifestRecords.flatMap(data -> DataStore.requestFileUrls(data).iterator());
+        JavaRDD<Tuple2<String, String>> listOfFastqUrls = manifestRecords.flatMap(
+                data -> dataStoreClient.requestFileUrls(data).iterator()
+        );
 
         ctx.parallelize(listOfFastqUrls.map(t -> t._1).collect()).saveAsTextFile(args.outputPath + "/uuids");
 
