@@ -1,5 +1,7 @@
 package kmer;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -12,6 +14,7 @@ import scala.Tuple2;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -81,37 +84,74 @@ public class Kmer {
         return (result);
     }
 
+    private static class Args implements Serializable {
+
+        @Parameter
+        private List<String> parameters = new ArrayList<>();
+
+        @Parameter(names = { "--endpoint", "-e" }, description = "DSS endpoint")
+        private String dssEndpoint;
+
+        @Parameter(names = { "--manifest-path", "-m" }, description = "Filepath to manifest")
+        private String manifestPath;
+
+        @Parameter(names = { "-k" }, description = "Base pairs in Kmers")
+        private Integer K = 1;
+
+        @Parameter(names = { "-n" }, description = "Top N kmers")
+        private Integer N = 1;
+
+        @Parameter(names = { "--number-of-partitions", "-p" }, description = "Number of partitions")
+        private Integer partitionsNum = 1;
+
+        @Parameter(names = { "--number-of-lines", "-l" }, description = "Number of lines")
+        private Integer numberOfLines = 1;
+
+        @Parameter(names = { "--output-path", "-o" }, description = "Output path")
+        private String outputPath;
+
+        @Parameter(names = { "--help", "-h" }, help = true)
+        private boolean help;
+    }
+
     // main method
-    public static void main(String[] args) throws Exception {
-        // STEP-1: handle input parameters
-        if (args.length < 5) {
-            System.err.println("Usage: Kmer <manifest> <K> <N> <partitions> <outputPath>");
-            System.exit(1);
+    public static void main(String[] argv) throws Exception {
+        Args args = new Args();
+
+        JCommander jCommander = JCommander.newBuilder()
+                .addObject(args)
+                .build();
+
+        jCommander.setProgramName("Kmer");
+        jCommander.parse(argv);
+        if (args.help) {
+            jCommander.usage();
+            return;
         }
-        final String manifestPath = args[0];
-        final int K = Integer.parseInt(args[1]); // to find K-mers
-        final int N = Integer.parseInt(args[2]); // to find top-N
-        final int partitionsNum = Integer.parseInt(args[3]); // number of partitions to use
-        final int numberOfLines = Integer.parseInt(args[4]); // number of partitions to use
-        final String outputPath = args[5]; // output report path
+
+        Kmer.run(args);
+    }
+
+    private static void run(Args args) throws Exception {
+        DataStoreClient dataStoreClient = new DataStoreClient(args.dssEndpoint);
 
         // STEP-2: create a Spark context object
         JavaSparkContext ctx = SparkUtil.createJavaSparkContext("kmer");
 
         // broadcast K and N as global shared objects,
         // which can be accessed from all cluster nodes
-        final Broadcast<Integer> broadcastK = ctx.broadcast(K);
-        final Broadcast<Integer> broadcastN = ctx.broadcast(N);
+        final Broadcast<Integer> broadcastK = ctx.broadcast(args.K);
+        final Broadcast<Integer> broadcastN = ctx.broadcast(args.N);
 
         // this is a manifest of UUIDs
-        JavaRDD<String> manifestRecords = ctx.textFile(manifestPath, partitionsNum);
+        JavaRDD<String> manifestRecords = ctx.textFile(args.manifestPath, args.partitionsNum);
         //JavaRDD<String> manifestRecords = ctx.textFile(manifestPath);
         JavaRDD<Tuple2<String, String>> listOfFastqUrls = manifestRecords.flatMap(data -> DataStore.requestFileUrls(data).iterator());
         listOfFastqUrls.map(t -> t._1).saveAsTextFile(outputPath + "/uuids.tsv");
 
         // now generate fastqs lines prefixed with file UUID
         JavaRDD<String> filteredRDD = listOfFastqUrls.flatMap(t -> {
-            ArrayList<String> result = Kmer.streamAndFilterFastqGz(t._1, t._2, numberOfLines);
+            ArrayList<String> result = Kmer.streamAndFilterFastqGz(t._1, t._2, args.numberOfLines);
             return (result.iterator());
         });
 
@@ -190,7 +230,7 @@ public class Kmer {
                 for (Map.Entry<Integer, String> entry : localtopN.get(uuid).entrySet()) {
                     finaltopN.put(entry.getKey(), entry.getValue());
                     // keep only top N
-                    if (finaltopN.size() > N) {
+                    if (finaltopN.size() > args.N) {
                         finaltopN.remove(finaltopN.firstKey());
                     }
                 }
@@ -201,7 +241,7 @@ public class Kmer {
         // emit final topN descending
         ArrayList<String> finalResults = new ArrayList<String>();
         for (String uuid : finalTopNForUUID.keySet()) {
-            System.out.println("=== top " + N + " kmers for " + uuid + " ===");
+            System.out.println("=== top " + args.N + " kmers for " + uuid + " ===");
             List<Integer> frequencies = new ArrayList<Integer>(finalTopNForUUID.get(uuid).keySet());
             for (int i = frequencies.size() - 1; i >= 0; i--) {
                 System.out.println(frequencies.get(i) + "\t" + finalTopNForUUID.get(uuid).get(frequencies.get(i)));
