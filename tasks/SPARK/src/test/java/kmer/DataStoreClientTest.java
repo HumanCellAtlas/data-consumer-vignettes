@@ -5,13 +5,16 @@ import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 import scala.Tuple2;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
 
-public class DataStoreTest {
+public class DataStoreClientTest {
 
     @Test
     public void testParseBundleManifest() throws InterruptedException, JSONException {
@@ -52,12 +55,19 @@ public class DataStoreTest {
             "  }\n" +
             "}\n"
         );
-        ArrayList<Tuple2<String,String>> results = DataStore.parseBundleManifest(json);
+        ArrayList<Tuple2<String,String>> results = DataStoreClient.parseBundleManifest(json);
         ArrayList<Tuple2<String,String>> expected = new ArrayList<>(Arrays.asList(
                 new Tuple2<String,String>("d4ebb0f1-4c3e-4fd6-8857-dd2cd49d4955", "https://presignedurl1.com"),
                 new Tuple2<String,String>("43cb0075-53b9-4eed-8ddf-73bfbc8768fe", "https://presignedurl2.com")
         ));
         assertTrue(results.equals(expected));
+    }
+
+    @Test
+    public void testSerialize() throws IOException {
+        ByteArrayOutputStream bas = new ByteArrayOutputStream(1024);
+        ObjectOutputStream oos = new ObjectOutputStream(bas);
+        oos.writeObject(new DataStoreClient("https://somewhere.com/"));
     }
 }
 
