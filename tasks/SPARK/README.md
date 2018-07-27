@@ -100,10 +100,7 @@ you'll need it later.
 
 ```
 # compile the code
-mvn clean install && aws s3 cp target/simple-project-1.0.jar s3://briandoconnor-toil-testing/
-
-# same but I commit, push, and then compile the code
-git commit -a -m updates; git push && mvn clean install && aws s3 cp target/simple-project-1.0.jar s3://briandoconnor-toil-testing/
+mvn package && aws s3 cp target/kmer-0.0-jar-with-dependencies.jar s3://briandoconnor-toil-testing/kmer-0.0-jar-with-dependencies.jar
 ```
 
 ## Running
@@ -115,23 +112,24 @@ You are going to need some parameters to launch this program:
 
 ```
 # args
---class Kmer
+--class kmer.Kmer
 
 # jar
-s3://briandoconnor-toil-testing/simple-project-1.0.jar
+s3://briandoconnor-toil-testing/kmer-0.0-jar-with-dependencies.jar
 
 # revised args, this will only process the first 1000 lines
-s3a://briandoconnor-toil-testing/manifest_small.tsv 32 10 40 1000 s3a://briandoconnor-spark-testing
+-e https://dss.data.humancellatlas.org/v1/ -m s3a://briandoconnor-toil-testing/manifest_small.tsv -k 32 -n 10 -p 40 -l 1000 -o s3a://briandoconnor-spark-testing
 ```
 
 Here the arguments are:
 
-1. the manifest of the UUIDs for input data bundles
-1. the size of the k-mer, in this case 32 bases
-1. the top N abundant k-mers to report back, in this case the top 10 abundant k-mer per fastq file
-1. the number of partitions, typically 3 or 4 times the number of CPU cores in your cluster (here my cluster is using `r4.xlarge` nodes, so 4 worker nodes x 4 cores x 3 or 4 = 48 to 64... I used 40)
-1. the number of sequences to process, here I'm just generating k-mers for the first 1000 reads per fastq file.  In Titus' blog post (see below) he used 1 million reads
-1. finally, the output S3 location for the output
+1. `-e`: the endpoint of the dss api
+1. `-m`: the manifest of the UUIDs for input data bundles
+1. `-k`: the size of the k-mer, in this case 32 bases
+1. `-n`: the top N abundant k-mers to report back, in this case the top 10 abundant k-mer per fastq file
+1. `-p`: the number of partitions, typically 3 or 4 times the number of CPU cores in your cluster (here my cluster is using `r4.xlarge` nodes, so 4 worker nodes x 4 cores x 3 or 4 = 48 to 64... I used 40)
+1. `-l`: the number of sequences to process, here I'm just generating k-mers for the first 1000 reads per fastq file.  In Titus' blog post (see below) he used 1 million reads
+1. `-o` finally, the output S3 location for the output
 
 **NOTE:** you need to customize the jar path to wherever you copied it to
 in the previous step.  You also need to customize `s3a://briandoconnor-toil-testing/manifest_small.tsv` to wherever you
