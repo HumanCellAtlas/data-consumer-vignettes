@@ -8,10 +8,10 @@
 | :full_moon: | [Stream FASTQs and Calculate k-mers with SPARK](tasks/SPARK) |
 | :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
-| :white_circle: | Download SmartSeq2 expression matrix as an input to scanpy |
-| :white_circle: | Find out how many liver (whatever) cells are available |
-| :white_circle: | Download all bundles for T-cells sequenced with 10x |
-| :white_circle: | Compare QC metrics between one experiment and another |
+| :large_orange_diamond: | [Download SmartSeq2 expression matrix as an input to scanpy](tasks/Download%20Expression%20Matrix%20for%20Scanpy) |
+| :full_moon: | [Find out how many liver (whatever) cells are available](tasks/Find%20Cell%20Type%20Count) |
+| :full_moon: | [Download all bundles for T-cells sequenced with 10x](tasks/Download%2010x%20Seq%20T-cell%20Bundles) |
+| :large_orange_diamond: | Compare QC metrics between one experiment and another |
 | :white_circle: | Check gene expression of key markers for immune cells |
 | :white_circle: | Compare averaged gene expression of neurons to bulk controls |
 | :white_circle: | Find most variable genes in monocytes across experiments |
