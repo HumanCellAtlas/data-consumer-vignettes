@@ -9,7 +9,7 @@
 | :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
 | :large_orange_diamond: | [Download SmartSeq2 expression matrix as an input to scanpy](tasks/Download%20Expression%20Matrix%20for%20Scanpy) |
-| :full_moon: | [Find out how many liver (whatever) cells are available](tasks/Find%20Cell%20Type%20Count) |
+| :full_moon: | [Find out how many brain (whatever) cells are available](tasks/Sum%20of%20All%20Brain%20Cells) |
 | :full_moon: | [Download all bundles for T-cells sequenced with 10x](tasks/Download%2010x%20Seq%20T-cell%20Bundles) |
 | :large_orange_diamond: | Compare QC metrics between one experiment and another |
 | :white_circle: | Check gene expression of key markers for immune cells |
