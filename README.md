@@ -11,6 +11,10 @@
 | :large_orange_diamond: | [Download SmartSeq2 expression matrix as an input to scanpy](tasks/Download%20Expression%20Matrix%20for%20Scanpy) |
 | :full_moon: | [Find out how many liver (whatever) cells are available](tasks/Find%20Cell%20Type%20Count) |
 | :full_moon: | [Download all bundles for T-cells sequenced with 10x](tasks/Download%2010x%20Seq%20T-cell%20Bundles) |
+| :white_check_mark: | [Use scanpy to explore an expression matrix downloaded from the HCA browser](nov18_demo) |
+| :white_circle: | Additional scanpy/seurat examples with expression matrix downloaded from the HCA browser: Filter matrix |
+| :white_circle: | Additional scanpy/seurat examples with expression matrix downloaded from HCA browser: Identify marker genes |
+| :white_circle: | Download specific json ingest metadata in tabular format, and relate to an expression matrix |
 | :large_orange_diamond: | Compare QC metrics between one experiment and another |
 | :white_circle: | Check gene expression of key markers for immune cells |
 | :white_circle: | Compare averaged gene expression of neurons to bulk controls |
