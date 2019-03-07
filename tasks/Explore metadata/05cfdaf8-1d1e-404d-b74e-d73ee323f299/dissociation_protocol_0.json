@@ -1,0 +1,18 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/protocol/biomaterial_collection/5.0.3/dissociation_protocol",
+    "schema_type": "protocol",
+    "protocol_core": {
+        "protocol_id": "dissociation_protocol_1",
+        "publication_doi": "https://doi.org/10.1101/108043"
+    },
+    "dissociation_method": {
+        "text": "fluorescence-activated cell sorting",
+        "ontology": "EFO:0009108",
+        "ontology_label": "fluorescence-activated cell sorting"
+    },
+    "provenance": {
+        "document_id": "31e708d3-79df-49b8-a3df-b1d694963468",
+        "submission_date": "2018-11-02T10:05:05.532Z",
+        "update_date": "2018-11-02T10:05:10.315Z"
+    }
+}

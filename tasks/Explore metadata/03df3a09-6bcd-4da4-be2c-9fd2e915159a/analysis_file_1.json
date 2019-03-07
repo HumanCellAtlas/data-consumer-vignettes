@@ -1,0 +1,13 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/file/5.3.4/analysis_file",
+    "schema_type": "file",
+    "file_core": {
+        "file_name": "b9bad327-2baf-4482-a4b8-2867ff1f6f0b_qc.insert_size_metrics.txt",
+        "file_format": "txt"
+    },
+    "provenance": {
+        "document_id": "cee6f28e-43ab-4c6a-90fd-b1481a68caf9",
+        "submission_date": "2018-11-02T19:25:10.985Z",
+        "update_date": "2018-11-02T19:43:06.471Z"
+    }
+}

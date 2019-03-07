@@ -1,0 +1,13 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/file/5.3.4/analysis_file",
+    "schema_type": "file",
+    "file_core": {
+        "file_name": "b9bad327-2baf-4482-a4b8-2867ff1f6f0b_base_distribution_by_cycle_metrics.csv",
+        "file_format": "csv"
+    },
+    "provenance": {
+        "document_id": "885d4f51-e501-43a8-bf9e-ecb35cded978",
+        "submission_date": "2018-11-02T19:25:11.608Z",
+        "update_date": "2018-11-02T19:43:24.484Z"
+    }
+}

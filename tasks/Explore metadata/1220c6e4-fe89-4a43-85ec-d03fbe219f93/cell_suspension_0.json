@@ -1,0 +1,25 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/biomaterial/8.6.1/cell_suspension",
+    "schema_type": "biomaterial",
+    "biomaterial_core": {
+        "biomaterial_id": "GSM2172506 1",
+        "biomaterial_description": "Single cell from human pancreas",
+        "ncbi_taxon_id": [
+            9606
+        ],
+        "insdc_biomaterial": "SRS1459231"
+    },
+    "genus_species": [
+        {
+            "text": "Homo sapiens",
+            "ontology": "NCBITaxon:9606",
+            "ontology_label": "Homo sapiens"
+        }
+    ],
+    "total_estimated_cells": 1,
+    "provenance": {
+        "document_id": "bd9f3573-b63c-4af0-91f8-a2c7f10e94f4",
+        "submission_date": "2018-11-02T10:02:27.201Z",
+        "update_date": "2018-11-02T10:10:08.203Z"
+    }
+}

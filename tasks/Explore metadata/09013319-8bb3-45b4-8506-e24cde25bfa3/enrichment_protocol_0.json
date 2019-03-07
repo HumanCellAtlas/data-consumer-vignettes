@@ -1,0 +1,19 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/protocol/biomaterial_collection/2.2.5/enrichment_protocol",
+    "schema_type": "protocol",
+    "protocol_core": {
+        "protocol_id": "enrichment_protocol_1",
+        "publication_doi": "https://doi.org/10.1101/108043"
+    },
+    "enrichment_method": {
+        "text": "FACS",
+        "ontology": "EFO:0009108",
+        "ontology_label": "fluorescence-activated cell sorting"
+    },
+    "markers": "HPx1+ HPi2+ CD133/1+ CD133/2+",
+    "provenance": {
+        "document_id": "5bd4ba68-4c0e-4d22-840d-afc025e7badc",
+        "submission_date": "2018-11-02T10:05:05.540Z",
+        "update_date": "2018-11-02T10:05:10.335Z"
+    }
+}

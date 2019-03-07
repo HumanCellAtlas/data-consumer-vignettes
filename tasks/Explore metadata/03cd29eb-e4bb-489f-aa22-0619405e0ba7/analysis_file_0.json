@@ -1,0 +1,13 @@
+{
+    "describedBy": "https://schema.humancellatlas.org/type/file/5.3.4/analysis_file",
+    "schema_type": "file",
+    "file_core": {
+        "file_name": "1f764662-9fc3-42fa-9769-a2306098e674_qc.bait_bias_summary_metrics.txt",
+        "file_format": "txt"
+    },
+    "provenance": {
+        "document_id": "9197e3e1-f861-4442-9ad6-de3b747e1dbf",
+        "submission_date": "2018-11-02T14:02:22.030Z",
+        "update_date": "2018-11-02T14:10:03.663Z"
+    }
+}
