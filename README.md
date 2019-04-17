@@ -17,7 +17,7 @@ None currently
 ## Contributed Vignettes
 | Status | Category | Task |
 | --- | --- | --- |
-| :white_check_mark: | Data Visualization | [Use Scanpy to Visualize Matrix data using tSNE and UMAP](tasks/nov2018_demo/hca_demo_scanpy.ipynb)
+| :white_check_mark: | Data Visualization | [Use Scanpy to Visualize Matrix data using tSNE and UMAP](nov2018_demo/hca_demo_scanpy.ipynb)
 | :white_check_mark: | Fundamentals | [Install the HCA CLI](tasks/Install)
 
 ## Beta Vignettes
