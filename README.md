@@ -45,7 +45,6 @@ None currently
 | :white_circle: | Discover novel liver cell types by cross-referencing HCA single cells with known datasets |
 
 ##### Legend - User Experience
-| :white_check_mark: | :full_moon: | :large_orange_diamond: | :red_circle: |
-:white_circle: |
-| :---: | :---: | :---: | :---: | :---: |
+| :white_check_mark: | :full_moon: | :large_orange_diamond: | :white_circle: |
+| :---: | :---: | :---: | :---: |
 |Works great! | A little kludgy | Requires workarounds | Proposed |
