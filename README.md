@@ -6,6 +6,7 @@
 | :white_check_mark: | [Install the HCA CLI](tasks/Install)
 | :large_orange_diamond: | [Log in to the DSS](tasks/Log%20In) |
 | :full_moon: | [Stream FASTQs and Calculate k-mers with SPARK](tasks/SPARK) |
+| :full_moon: | [Analyzing matrix data in Scanpy - May 2019](may2019_demo) |
 | :full_moon: | [Download any BAM file](tasks/Download%20BAM) |
 | :large_orange_diamond: | Download FASTQs associated with a known sample ID |
 | :large_orange_diamond: | [Download SmartSeq2 expression matrix as an input to scanpy](tasks/Download%20Expression%20Matrix%20for%20Scanpy) |
