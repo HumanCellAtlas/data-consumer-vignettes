@@ -62,7 +62,7 @@ Once you have the notebook server running you can navigate to:
 http://localhost:8000
 
 To interact with the notebook.  You can then
-select the `hca_demo_scanpy.ipynb` notebook from the `Files` section.
+select the `notebooks_hca_demo_scanpy.ipynb` notebook from the `Files` section.
 
 ## Tutorial Walkthrough
 
