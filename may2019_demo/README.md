@@ -59,7 +59,7 @@ $ jupyter notebook --notebook-dir=`pwd`
 
 Once you have the notebook server running you can navigate to:
 
-http://localhost:8000
+http://localhost:8888
 
 To interact with the notebook.  You can then
 select the `notebooks_hca_demo_scanpy.ipynb` notebook from the `Files` section.
