@@ -4,8 +4,7 @@ python:
 - 3.7
 
 install:
-- pip install -r test/requirements.txt
-- pip install -r test/requirements-dev.txt
+- pip install -r test/requirements.dev.txt
 
 before_script:
 # To ignore a directory, we can just delete the directory
