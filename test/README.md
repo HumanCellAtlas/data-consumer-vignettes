@@ -12,9 +12,9 @@ on Travis. That's it.
 
 ## Structure
 
-.
-├── README.md               You are here!
-├── ignore                  Add a directory to this file (one per line) to skip during testing
-├── requirements-dev.txt    Dependencies for running the tests
-└── requirements.txt        Dependencies for running the notebooks
+    .
+    ├── README.md               You are here!
+    ├── ignore                  Add a directory to this file (one per line) to skip during testing
+    ├── requirements-dev.txt    Dependencies for running the tests
+    └── requirements.txt        Dependencies for running the notebooks
 
