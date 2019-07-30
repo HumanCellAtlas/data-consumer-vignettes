@@ -1,0 +1,4 @@
+hca==6.3.0
+matplotlib==3.1.1
+scanpy[louvain]==1.4.4
+loompy==2.0.17
