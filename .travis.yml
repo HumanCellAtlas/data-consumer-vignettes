@@ -10,7 +10,7 @@ install:
 before_script:
 # To ignore a directory, we can just delete the directory
 # so that treon doesn't see it.
-- xargs -I @ rm -rf $(realpath @) < test/ignore
+- xargs -I @ rm -rf @ < test/ignore
 
 script:
 - treon

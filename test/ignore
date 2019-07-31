@@ -1,1 +1,4 @@
 tasks/Log\ In  # This notebook does `hca login`, which is interactive and will hang forever.
+tasks/  # Let's ignore all notebooks for now and slowly re-add them
+nov2018_demo/
+may2019_demo/

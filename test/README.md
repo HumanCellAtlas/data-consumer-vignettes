@@ -27,3 +27,9 @@ prior to testing.
 
 `test/requirements.txt` is used to list dependencies used by all notebooks.
 
+## Ignoring notebooks
+
+To ignore a notebook during testing, add its path to `test/ignore`, one path per line.
+Paths should be relative to the repository root.
+The specified path will be deleted before tests are run. (Ham-fisted, I know.)
+
