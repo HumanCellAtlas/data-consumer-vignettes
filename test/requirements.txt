@@ -1,3 +1,4 @@
 hca==6.3.0
+pysam==0.15.3
 -r ../may2019_demo/requirements.txt
 -r ../nov2018_demo/requirements.txt
