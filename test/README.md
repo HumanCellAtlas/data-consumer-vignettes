@@ -33,3 +33,6 @@ To ignore a notebook during testing, add its path to `test/ignore`, one path per
 Paths should be relative to the repository root.
 The specified path will be deleted before tests are run. (Ham-fisted, I know.)
 
+* All tests are currently skipped while they are polished to pass testing.
+* [tasks/Log In/](tasks/Log\ In/) is skipped because `hca login` is interactive and
+  will hang indefinitely.

@@ -1,4 +1,4 @@
-tasks/Log\ In  # This notebook does `hca login`, which is interactive and will hang forever.
-tasks/  # Ignore all notebooks for now
+tasks/Log\ In/
+tasks/
 nov2018_demo/
 may2019_demo/
