@@ -7,6 +7,9 @@ python:
 - 3.8-dev
 
 install:
+# numpy requires some additional dependencies
+- sudo apt-get update
+- sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran libhdf5-dev
 - pip install -r test/requirements-dev.txt
 - find . -name "requirements.txt" | xargs -I@ pip install -r "@"
 
