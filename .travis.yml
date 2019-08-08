@@ -9,7 +9,7 @@ python:
 
 install:
 - pip install -r test/requirements-dev.txt
-- find . -name "requirements.txt" | xargs -I @ echo pip install -r  @
+- find . -name "requirements.txt" | xargs -I@ pip install -r "@"
 
 before_script:
 # To ignore a directory, we can just delete the directory
