@@ -8,13 +8,18 @@ to run the tests.)
 
 The test harness is a wrapper around [ReviewNB/treon](https://github.com/ReviewNB/treon)
 with some extra code to ignore tests, install dependencies, and run all of the above
-on Travis. That's it.
+on Travis.
+
+The tests also check if output is committed with the notebook (which it should be).
+This test is naive - it tests if the number of code cells in a notebook is equal to
+the number of cell outputs in the same notebook.
 
 ## Structure
 
     .
     ├── README.md               You are here!
     ├── ignore                  Add a directory to this file (one per line) to skip during testing
+    ├── test_output.sh          Tests that output has been committed with the notebook.
     ├── requirements-dev.txt    Dependencies for running the tests
     └── requirements.txt        Dependencies for running notebooks (global)
 

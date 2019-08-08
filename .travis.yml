@@ -17,4 +17,6 @@ before_script:
 - xargs -I @ rm -rf @ < test/ignore
 
 script:
-- treon
+- treon  # Test that notebooks run successfully
+# Naive test to check that output committed with notebook-
+- find . -name "*.ipynb" | xargs sh test/test_output.sh
