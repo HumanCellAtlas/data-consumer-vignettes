@@ -1,0 +1,20 @@
+language: python
+dist: xenial  # for python3.7+ testing
+
+python:
+- 3.5
+- 3.6
+- 3.7
+- 3.8-dev
+
+install:
+- pip install -r test/requirements-dev.txt
+- find . -name "requirements.txt" | xargs -I @ echo pip install -r  @
+
+before_script:
+# To ignore a directory, we can just delete the directory
+# so that treon doesn't see it.
+- xargs -I @ rm -rf @ < test/ignore
+
+script:
+- treon
