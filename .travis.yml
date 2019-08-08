@@ -11,14 +11,15 @@ install:
 - sudo apt-get update
 - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran libhdf5-dev
 - pip install -r test/requirements-dev.txt
-- find . -name "requirements.txt" | xargs -I@ pip install -r "@"
+- find . -name "requirements.txt" -exec pip install -r "{}" \;
 
 before_script:
 # To ignore a directory, we can just delete the directory
 # so that treon doesn't see it.
-- xargs -I @ rm -rf @ < test/ignore
+- xargs -t rm -rf < test/ignore
 
 script:
-- treon  # Test that notebooks run successfully
+# Test that notebooks run successfully
+- find "$PWD" -name "*.ipynb" -exec sh test/test_notebook.sh "{}" \;
 # Naive test to check that output committed with notebook-
-- find . -name "*.ipynb" | xargs sh test/test_output.sh
+- find . -name "*.ipynb" -exec sh test/test_output.sh "{}" \;
