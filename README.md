@@ -1,5 +1,6 @@
 # DCP Data Consumer Experience
 
+[![Build Status](https://travis-ci.com/HumanCellAtlas/data-consumer-vignettes.svg?branch=master)](https://travis-ci.com/HumanCellAtlas/data-consumer-vignettes)
 
 ## Overview
 Welcome to the DCP Vignette repository, containing walkthrough tutorials to help you get started with the DCP primarily via command-line access. For downstream application development, please refer to the [HCA DCP API documentation](https://prod.data.humancellatlas.org/apis)  Before the DCP exits beta, the vignettes below are all considered experimental.
