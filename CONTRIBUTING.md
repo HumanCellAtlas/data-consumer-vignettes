@@ -8,9 +8,6 @@ expected to abide by the following guidelines.
 1. Don't break the build: pull requests are expected to pass all
   automated CI checks.
 
-1. Keep the build simple: Automated CI checks that are fragile or don't
-  serve a clear agreed upon purpose will be removed.
-
 1. All Pull Request comments must be addressed, even after merge.
 
 1. All code must be reviewed by at least 1 other team member.
@@ -20,5 +17,5 @@ expected to abide by the following guidelines.
 
 1. Individual commit messages should clearly express the commit's purpose.
 
-1. To submit a vignette, follow the file structure in place, create a new branch with the user’s name followed by the vignette’s purpose (ie. <firstName>-<topic>-<vignettes>), and create a Pull Request. 
+1. To submit a vignette, follow the file structure in place, create a new branch with the user’s name followed by the vignette’s purpose (ie.{<firstName>}-{<topic>}-{<vignettes>}), and create a Pull Request. 
 
