@@ -3,7 +3,7 @@ Contributions to HCA working group repos are subject to overall HCA
 governance and technical guidance. In addition, contributors are
 expected to abide by the following guidelines.
 
-1. File structure: At the root of the project, have a directory with a meaningful title that is understandable and accessible. Inside the directory, there needs to be a working example/notebook (.ipynb) and a README.md. Optional files to make your program run are welcomed but not necessary. 
+1. File structure: At the root of the project, have a directory with a meaningful title that is easy to understand and related to the topic. Inside the directory, there needs to be a working example/notebook (.ipynb) and a README.md. Optional files to make your program run are welcomed but not necessary. 
 
 1. Don't break the build: pull requests are expected to pass all
   automated CI checks.
