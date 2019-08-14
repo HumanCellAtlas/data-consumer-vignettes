@@ -16,6 +16,11 @@ distribution. For some users, it may be necessary to use `pip3` instead.
 pip install -r ./REQUIREMENTS.txt
 ```
 
+Depending on your platform, you might need to install additional depenencies:
+
+    $ sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran libhdf5-dev
+
+
 ## Usage
 
 Start up the jupyter kernel, which will open a web browser. You can then 
