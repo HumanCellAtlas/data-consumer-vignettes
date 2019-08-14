@@ -5,10 +5,9 @@ Welcome to the DCP Vignette repository, containing walkthrough tutorials to help
 
 echo "The DCP welcomes any contributed notebooks or other tutorials to the list below. You can create your own branch and submit a pull request. " >> ToC.md
 
-echo "Vignettes" >> Toc.md
+echo "Vignettes Table of Contents:" >> Toc.md
 
 git ls-files */{README.md,*.ipynb} | while read line; do
     echo "'$line'" | tr -d "'" | awk -F "/" '{x=$0; gsub(/ /,"%",$1); gsub(/ /,"%",$2); print "- [" x " ](" $1 "/" $2 ")" }' >> ToC.md
-    # echo "'$line'"| tr -d "'" | awk -F " / " ' {gsub(/ /, "%",$1);  print "- [ "$0" ](" $1 "/" $3 ")" } ' >>  ToC.md 
 done
 
