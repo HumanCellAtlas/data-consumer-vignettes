@@ -17,5 +17,5 @@ expected to abide by the following guidelines.
 
 1. Individual commit messages should clearly express the commit's purpose.
 
-1. To submit a vignette, follow the file structure in place, create a new branch with the user’s name followed by the vignette’s purpose (ie.{firstName}-{topic}-{vignettes}), and create a Pull Request. 
+1. To submit a vignette, follow the file structure in place, create a new branch with the user’s name followed by the vignette’s purpose (ie.{firstName}-{vignetee_topic}), and create a Pull Request. 
 
