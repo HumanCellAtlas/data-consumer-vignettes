@@ -18,6 +18,6 @@ find . -name "*.ipynb" | while read line; do
     echo "'$line'"
     echo "'$line'" | awk -F'/' '{print $1; print $2; print $3; print $4; print $5}'
     echo "'$line'" | awk -F "/" '{ gsub(/#/,"  ",$2); gsub(/[ ]/,"-",$3); print $2 "- [" $2 "](" $2 "/" $3 ")" }'
-    echo "'$line'" | awk -F "/" '{ print "- [ "$2" ](" $2 "/" $3 ")" }' >> ToC.md 
+    echo "'$line'"| tr -d "'" | awk -F "/" '{ print "- [ "$2" ](" $2 "/" $3 ")" }' >> ToC.md 
 done
 
