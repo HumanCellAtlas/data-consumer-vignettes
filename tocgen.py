@@ -12,7 +12,7 @@ for dirName, subdirList, fileList in os.walk(rootDir):
         pass
     else:
         for fname in fileList:
-            if fname == "README.md":
+            if fname == "README.md" and dirName != ".":
                 list_dirs += "* [{}](#{})\n".format(dirName,os.path.join(dirName,fname).replace(" ", "%"))
 
 vars = {"toc": list_dirs.replace("./","")}
