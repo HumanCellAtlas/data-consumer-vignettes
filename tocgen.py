@@ -19,7 +19,7 @@ for items in list_dirs:
     root, dirName, readMe = items.split("/")
     link = os.path.join(dirName, readMe).replace(" ","%")
     if dirName != 'test':
-        content += "[{}]({})\n".format(dirName, link)
+        content += "* [{}]({})\n".format(dirName, link)
 
 # Saves content to object that will be used to write to template 
 vars = {"toc": content}
