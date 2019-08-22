@@ -13,7 +13,7 @@ and that the `pip` executable installs packages for that python
 distribution. For some users, it may be necessary to use `pip3` instead.
 
 ```bash
-pip install -r ./REQUIREMENTS.txt
+pip install -r requirements.txt
 ```
 
 Depending on your platform, you might need to install additional depenencies:
@@ -23,9 +23,6 @@ Depending on your platform, you might need to install additional depenencies:
 
 ## Usage
 
-Start up the jupyter kernel, which will open a web browser. You can then 
-select the `hca_demo_scanpy.ipynb` notebook from the `Files` sidebar. 
-
 ```bash
-jupyter lab
+$ jupyter notebook hca_demo_scanpy.ipynb
 ```
