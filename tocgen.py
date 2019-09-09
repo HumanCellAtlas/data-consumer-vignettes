@@ -25,5 +25,5 @@ for items in list_dirs:
 vars = {"toc": content}
 
 # Writes to toc.md based on template 
-with open('toc.md', 'w') as f:
+with open('README.md', 'w') as f:
     f.write(template.render(**vars))
