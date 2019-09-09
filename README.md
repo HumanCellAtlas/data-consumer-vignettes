@@ -1,7 +1,7 @@
 ## Overview
 
 Welcome to the DCP Vignette repository, containing walkthrough tutorials to help you get started with the DCP primarily via command-line access. For downstream application development, please refer to the [HCA DCP API documentation](https://prod.data.humancellatlas.org/apis).
-The DCP welcomes any contributed notebooks or other tutorials to the list below. You can create your own branch and submit a pull request. 
+The DCP welcomes any contributed notebooks or other tutorials to the list below. You can create your own branch and submit a pull request.  
 
 ## Vignettes Table of Contents:
 
