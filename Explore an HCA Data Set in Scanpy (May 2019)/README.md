@@ -4,7 +4,7 @@
 
 The vignette in this folder demonstrates the ability to load an expression matrix downloaded
 from the HCA Data Browser into Scanpy and briefly explore the data.  This tutorial was based on the
-[original tutorial](https://github.com/HumanCellAtlas/data-consumer-vignettes/tree/master/nov2018_demo) created in November of 2018 by Genevieve Haliburton and other members of the HCA
+[original tutorial](https://github.com/HumanCellAtlas/data-consumer-vignettes/tree/master/Explore%20an%20HCA%20Data%20Set%20in%20Scanpy%20(Nov%202018)) created in November of 2018 by Genevieve Haliburton and other members of the HCA
 DCP team.  It has been updated to work directly with the loom-based matrix produced by the
 matrix service that you can use from the [HCA Data Browser](https://prod.data.humancellatlas.org/explore).
 
