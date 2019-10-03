@@ -17,7 +17,7 @@ content = ""
 # content var
 for items in list_dirs:
     root, dirName, readMe = items.split("/")
-    link = os.path.join(dirName, readMe).replace(" ","%")
+    link = os.path.join(dirName, readMe).replace(" ","%20")
     if dirName != 'test':
         content += "* [{}]({})\n".format(dirName, link)
 
