@@ -20,6 +20,6 @@ before_script:
 
 script:
 # Test that notebooks run successfully
-- find "$PWD" -name "*.ipynb" -exec sh test/test_notebook.sh "{}" \;
+- find "$PWD" -name "*.ipynb" -exec sh test/test_notebook.sh "{}" +
 # Naive test to check that output committed with notebook-
 - find . -name "*.ipynb" -exec sh test/test_output.sh "{}" \;
