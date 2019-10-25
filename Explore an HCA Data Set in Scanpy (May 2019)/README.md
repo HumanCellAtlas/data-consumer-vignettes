@@ -68,11 +68,11 @@ select the `notebooks_hca_demo_scanpy.ipynb` notebook from the `Files` section.
 
 You can find a complete walkthrough in the [Guide](https://prod.data.humancellatlas.org/guides) section of the HCA Data Portal.
 
-In short, if you run the notebook as is it will use:
+In short, if you run the notebook as is, it will use the following file as the input file:
 
-file:///f9e363cd-7fa5-4349-add2-1c9bd86d10c8.loom as the input file
+    file:///f9e363cd-7fa5-4349-add2-1c9bd86d10c8.loom
 
-You can alternatively replace the value in the field in the second code block with a Loom URL
-you got from the matrix download feature of the portal, such as:
+Alternatively, you can replace the value in the field in the second code block with a Loom URL
+from the matrix download feature of the portal, such as:
 
-https://s3.amazonaws.com/dcp-matrix-service-results-prod/3938cf5a-3159-4eb7-aef5-59589795c268.loom
+    https://s3.amazonaws.com/dcp-matrix-service-results-prod/3938cf5a-3159-4eb7-aef5-59589795c268.loom
