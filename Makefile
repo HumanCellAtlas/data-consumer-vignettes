@@ -1,4 +1,4 @@
-all:
+include common.mk
 
 refresh_all_requirements:
 	@echo '' >| requirements.txt
