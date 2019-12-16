@@ -22,4 +22,4 @@ script:
 # Test that notebooks run successfully
 - treon
 # Naive test to check that output committed with notebook-
-- find . -name "*.ipynb" -exec sh test/test_output.sh "{}" \;
+- find . -name "*.ipynb" | tr '\n' '\0' | xargs -0 -n1 sh test/test_output.sh

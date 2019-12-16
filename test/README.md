@@ -12,7 +12,7 @@ on Travis.
 
 The tests also check if output is committed with the notebook (which it should be).
 This test is naive - it tests if the number of code cells in a notebook is equal to
-the number of cell outputs in the same notebook.
+the number of cell outputs in the same notebook. (See `.travis.yml`.)
 
 ## Structure
 
