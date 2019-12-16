@@ -13,13 +13,8 @@ install:
 - pip install -r test/requirements-dev.txt
 - find . -name "requirements.txt" -exec pip install -r "{}" \;
 
-before_script:
-# To ignore a directory, we can just delete the directory
-# so that treon doesn't see it.
-- xargs -t rm -rf < test/ignore
-
 script:
 # Test that notebooks run successfully
-- treon
+- eval "treon $(awk '{printf " --exclude " $0}' test/ignore)"
 # Naive test to check that output committed with notebook-
 - find . -name "*.ipynb" | tr '\n' '\0' | xargs -0 -n1 sh test/test_output.sh
