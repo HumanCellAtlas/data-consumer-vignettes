@@ -54,7 +54,7 @@ $ pip install -r ./REQUIREMENTS.txt
 Start up the jupyter kernel, which will open a web browser.
 
 ```bash
-$ jupyter notebook --notebook-dir=`pwd`
+$ jupyter notebook --notebook-dir="$(pwd)"
 ```
 
 Once you have the notebook server running you can navigate to:
