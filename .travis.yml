@@ -1,6 +1,8 @@
 language: python
 dist: xenial  # for python3.7+ testing
 
+cache: pip
+
 python:
 - 3.6
 - 3.7
