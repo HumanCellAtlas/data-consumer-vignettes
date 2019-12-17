@@ -70,4 +70,3 @@ public class DataStoreClientTest {
         oos.writeObject(new DataStoreClient("https://somewhere.com/"));
     }
 }
-

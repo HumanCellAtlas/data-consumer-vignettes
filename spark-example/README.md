@@ -193,7 +193,7 @@ d03e1fb5-0bd6-41ad-9744-c87af0fbdc33	40	TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTCT
 
 This is an extremely basic example of how to access HCA data on AWS using
 SPARK.  A future iteration of this code could do something much more interesting.  I'm
-thinking of implementing what Titus Brown covers in this [blog post](http://ivory.idyll.org/blog/2016-sourmash.html).  
+thinking of implementing what Titus Brown covers in this [blog post](http://ivory.idyll.org/blog/2016-sourmash.html).
 Specifically it would be super cool to calculate MinHash signature for each
 of the biomaterials in HCA and use these to quickly compare samples by samples.
 Perhaps this would be useful in building a feature to ask "what cells are

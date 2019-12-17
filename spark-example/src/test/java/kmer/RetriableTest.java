@@ -22,5 +22,3 @@ public class RetriableTest {
         assertTrue(opt.get() == 2);
     }
 }
-
-
