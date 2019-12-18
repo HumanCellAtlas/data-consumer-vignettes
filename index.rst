@@ -1,0 +1,23 @@
+.. Data Consumer Vignettes documentation master file, created by
+   sphinx-quickstart on Thu Dec 12 11:09:06 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Data Consumer Vignettes's documentation!
+===================================================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   ../download-10x-seq-tcell/download-10x-seq-tcell.ipynb
+   ../download-all-fastq-files/download-all-fastq-files.ipynb
+   ../download-any-bam-file/download-any-bam-file.ipynb
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
