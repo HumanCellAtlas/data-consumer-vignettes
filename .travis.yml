@@ -12,7 +12,7 @@ install:
 - sudo apt-get update
 - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran libhdf5-dev
 - pip install -r test/requirements-dev.txt
-- find . -name "requirements.txt" -exec pip install -r "{}" \;
+- find . -name "requirements.txt" | tr '\n' '\0' | xargs -0 -n1 pip install -r
 
 script:
 # Test that notebooks run successfully
