@@ -10,9 +10,15 @@ Welcome to Data Consumer Vignettes's documentation!
    :maxdepth: 1
    :caption: Contents:
 
-   ../download-10x-seq-tcell/download-10x-seq-tcell.ipynb
-   ../download-all-fastq-files/download-all-fastq-files.ipynb
-   ../download-any-bam-file/download-any-bam-file.ipynb
+   install-hca/install-hca.ipynb
+   login/login.ipynb
+   download-10x-seq-tcell/download-10x-seq-tcell.ipynb
+   download-all-fastq-files/download-all-fastq-files.ipynb
+   download-any-bam-file/download-any-bam-file.ipynb
+   download-smartseq2-matrix-scanpy/download-smartseq2-matrix-scanpy.ipynb
+   explore-hca-dataset-scanpy-may-2019/explore-hca-dataset-scanpy-may-2019.ipynb
+   explore-hca-dataset-scanpy-nov-2018/explore-hca-dataset-scanpy-nov-2018.ipynb
+   find-cell-type-count/find-cell-type-count.ipynb
 
 
 Indices and tables
