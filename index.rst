@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Data Consumer Vignettes's documentation!
-===================================================
+Welcome to the Human Cell Atlas Data Consumer Example Notebooks
+===============================================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    install-hca/install-hca.ipynb
