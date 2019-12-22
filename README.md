@@ -14,7 +14,7 @@ The DCP welcomes any contributed notebooks or other tutorials to the list below.
 * [Login to the DSS](login/login.ipynb)
 * [Writing ElasticSearch Queries](elasticsearch-queries/elasticsearch-queries.ipynb)
 
-* [Download 10x Seq T-cell Bundles](download-10x-seq-tcell/download-10x-seq-tcell.ipynb)
+* [Download 10x seq liver cell bundles](download-10x-liver/download-10x-liver.ipynb)
 * [Download all .fastq files in a project](download-all-fastq-files/download-all-fastq-files.ipynb)
 * [Download Any BAM File](download-any-bam-file/download-any-bam-file.ipynb)
 * [Download Expression Matrix for Scanpy](download-smartseq2-matrix-scanpy/download-smartseq2-matrix-scanpy.ipynb)
