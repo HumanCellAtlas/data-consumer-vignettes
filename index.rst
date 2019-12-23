@@ -12,7 +12,7 @@ Welcome to Data Consumer Vignettes's documentation!
 
    install-hca/install-hca.ipynb
    login/login.ipynb
-   download-10x-seq-tcell/download-10x-seq-tcell.ipynb
+   download-10x-liver/download-10x-liver.ipynb
    download-all-fastq-files/download-all-fastq-files.ipynb
    download-any-bam-file/download-any-bam-file.ipynb
    download-smartseq2-matrix-scanpy/download-smartseq2-matrix-scanpy.ipynb
