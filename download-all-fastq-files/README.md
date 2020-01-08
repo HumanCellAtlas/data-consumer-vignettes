@@ -1,6 +1,6 @@
-# Download all `.fastq` files in a project
+# Downloading All Fastq Files in a Project
 
-This task demonstrates how to download all `.fastq` files in a project
-given the project's ID.
+In this notebook we demonstrate a way to search a given project for bundles containing fastq files, and how to
+download all of those fastq files.
 
-See the [notebook](https://github.com/HumanCellAtlas/data-consumer-vignettes/blob/master/Download%20all%20.fastq%20files%20in%20a%20project/Download%20all%20.fastq%20files%20in%20a%20project.ipynb).
+See the [notebook](download-all-fastq-files.ipynb).
